@@ -8,10 +8,10 @@ const User = require("../models/User");
 //*---Stripe Payment----
 const handleStripePayment = asyncHandler(async (req, res) => {
   const { amount, subscriptionPlan } = req.body;
-  console.log(amount, subscriptionPlan);
+
   //get the user
   const user = req.user;
-  console.log(user);
+
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Number(amount) * 100,
@@ -23,7 +23,7 @@ const handleStripePayment = asyncHandler(async (req, res) => {
         subscriptionPlan,
       },
     });
-    console.log(paymentIntent);
+
     //send response to the client
     res.json({
       clientSecret: paymentIntent.client_secret,
@@ -78,7 +78,7 @@ const verifyPayment = asyncHandler(async (req, res) => {
   const { paymentId } = req.params;
   try {
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentId);
-    console.log(paymentIntent);
+
     if (paymentIntent.status === "succeeded") {
       //get info metadata
       const metadata = paymentIntent.metadata;

@@ -4,7 +4,6 @@ const ContentHistory = require("../models/ContentHistory");
 const User = require("../models/User");
 
 const openAIController = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const { prompt } = req.body;
   try {
     const response = await axios.post(

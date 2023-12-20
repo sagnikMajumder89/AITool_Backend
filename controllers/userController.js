@@ -73,12 +73,11 @@ const login = asyncHandler(async (req, res) => {
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "3d",
   });
-  console.log(token);
   //Set token into cookie
   res.cookie("token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "None",
     maxAge: 24 * 60 * 60 * 1000, // 1 day
   });
   //Send response

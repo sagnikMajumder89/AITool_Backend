@@ -10,7 +10,7 @@ const openaiRouter = require("./routes/openAIrouter");
 const stripeRouter = require("./routes/stripeRouter");
 const { errorHandler } = require("./middleware/errorMiddleware");
 const User = require("./models/User");
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 //*Cron for the trial period (every single day)
 cron.schedule("0 0 * * * *", async () => {
@@ -103,5 +103,5 @@ app.use("/api/v1/stripe", stripeRouter);
 
 app.use(errorHandler);
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running on port: ${port}`);
 });
